@@ -1,0 +1,45 @@
+
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor</title>
+    <link rel="shortcut icon" href="{% static 'logo-gestor.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+
+<nav class="nav">
+    <input type="checkbox" id="nav-check">
+    <div class="nav-header">
+        <div class="nav-title">
+            <a href="/"><img src="{% static 'images/gestor.png' %}" alt="Logo principal" class="img-logo"></a>
+        </div>
+    </div>
+    <div class="nav-btn">
+        <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
+
+    <ul class="nav-list">
+        <li><a href="#">Iniciar chat</a></li>
+        <li><a href="#">Iniciar sesión</a></li>
+        <!--<li>
+            <a href="">Sobre nosotros <i class="fas fa-caret-down"></i></a>
+            <ul class="rounded">
+                <li><a href="#">Quienes somos</a></li>
+                <li><a href="#">Contactanos</a></li>
+            </ul>
+        </li>-->
+    </ul>
+</nav>
+
+{% block content %}
+{% endblock %}

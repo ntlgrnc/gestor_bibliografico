@@ -1,0 +1,14 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+    <h1>Usuarios registrados</h1>
+
+    {% for user in users %}
+        <ul>
+            <li>{{ user.nombres }}</li>
+            <li>{{ user.apellidos }}</li>
+            <li>{{ user.correo }}</li>
+            <li>{{ user.clave }}</li>
+        </ul>
+    {% endfor %}
+{% endblock %}    

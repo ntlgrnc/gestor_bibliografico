@@ -1,0 +1,31 @@
+PDF: Hello and welcome to this informative PDF file on the investigation of air pollution mitigation measures, ventilation, and indoor air quality at three schools in London! This study highlights the effectiveness of green screens, air purifiers, and school street interventions in reducing outdoor and indoor particle concentrations, as well as the importance of effective ventilation in maintaining good indoor air quality.
+
+1. How did the green screen at the school boundary contribute to reducing outdoor particle levels?
+2. What were the findings regarding the use of air purifiers in classrooms to reduce indoor particle concentrations?
+3. How did high occupancy levels impact PM10 and CO2 levels in classrooms, and what measures were recommended to address this issue?
+
+Me: generate a citation for this article?
+
+PDF: Abhijith, K.V., Kukadia, V., Kumar, P. (2022). Investigation of air pollution mitigation measures, ventilation, and indoor air quality at three schools in London. Atmospheric Environment, 289, 119303.
+
+Me: generate a citation for this article
+
+PDF: Abhijith, K.V., Kukadia, V., & Kumar, P. (2022). Investigation of air pollution mitigation measures, ventilation, and indoor air quality at three schools in London. Atmospheric Environment, 289, 119303. https://doi.org/10.1016/j.atmosenv.2022.119303
+
+Me: what is the title of the article?
+
+PDF: The title of the article is "Investigation of air pollution mitigation measures, ventilation, and indoor air quality at three schools in London."
+
+Me: what is the topic of the article?
+
+PDF: The topic of the article is focused on investigating air pollution mitigation measures, ventilation strategies, and indoor air quality at three schools in London.
+
+Me: what is the research problem?
+
+PDF: The research problem addressed in the article is the extent of air pollution issues inside and around schools in urban areas, particularly in London, and the factors influencing indoor air quality. The study aims to understand the impact of air pollution on schools, explore interventions to mitigate air pollution exposure, and assess the effectiveness of these interventions in improving indoor and outdoor air quality at schools.
+
+Me: what is the objective of the research?
+
+PDF: The main objectives of the research are:
+1. To obtain a clearer understanding of the extent of the air pollution problem inside and around schools in urban areas, particularly in London.
+2. To determine effective ways to mitigate air pollution exposure by investigating a range of interventions, such as green screens, air purifiers, and school streets, and monitoring air pollution and associated parameters in and around three primary schools in London.

@@ -1,0 +1,24 @@
+Funciones utiles
+1. si escribo print(el dato que quiero ver), al ejecutar el servidor ese print aparece en la consola de la terminal
+2. si quiero solo los valores y no el objeto de una consulta a la bd, uso Usuarios.objects.values()
+3. si quiero saber que estoy enviando en un form, puedo hacerlo con print(request.GET) o print(request.POST) y para saber el campo específico sería: print(request.GET['parametro'])
+
+
+Migracion de la bd
+1. python manage.py makemigrations = inicialmente y cada que haya un cambio en los modelos de la bd
+2. python manage.py migrate = actualiza los cambios nuevos para la bd luego de haber generado las migraciones con make migrations
+3. en el setting.py se agregan las aplicaciones del proyecto
+
+Crear registros en bd desde el shell
+ - python manage.py shell
+1. from myapp.models import Usuarios, Introduction <=(nombres de los modelos)  importar los modelos
+2. p= Usuarios(nombre="nata", apellidos="garnica", correo="nata@correo", clave="1234") <= creo en una variable el objeto
+3. p.save() <= guarda el registro en la base de datos
+4. Usuarios.objects.all() <= me trae todos los registros en forma de objeto
+5. Usuarios.objects.get(id=1) <= dentro del get pongo la columna por la cual quiero que me busque y retorna también el registro en forma de objeto, si no lo encuentra genera un error de que no existe
+
+Claves foráneas
+6. p = Usuarios.objects.get(id=1) <= inicio buscando el registro en la tabla foránea a la de Introduction que voy a usar y lo guardo en la variable
+7. p.introduction_set.all() <= tengo que poner el nombre de la tabla con un guión y set para buscar los registros con el id foráneo
+8. p.introduction_set.create(citation="blabla") <= guarda el dato en la base de datos con la clave foránea encontrada inicialmente
+9. Usuarios.objects.filter(nombres__startswith="") <= me traería datos filtrados con lo que le especifique dentro, la estructura del parametro debe ser el nombre de la columna, dos guiones y luego el filtro a aplicar (es como un LIKE)

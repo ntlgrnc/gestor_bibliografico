@@ -1,0 +1,80 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h3>Lector y generador de la plantilla del archivo introducción</h3>
+    <br>
+    <div class="row mb-5">
+        <div class="col-8">
+            <p>Has iniciado cómo: Natalia Garnica</p>
+            <br><br>
+            <form action="{% url 'createIntroduction' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="id_usuario" value="1">
+                <div class="mb-3">
+                    <div>
+                        <label for="formFile" class="form-label">Carga aquí tu archivo de texto</label>
+                        <input class="form-control" id="formFile" name="archivo" type="file">
+                      </div>
+                </div>
+                <button class="btn btn-info text-light" type="submit">Cargar</button>
+            </form>
+        </div>
+        <div class="col-4">
+            <!--<div class="card">
+                <div class="card-body">
+                    Las preguntas que se deben enviar en ChatPDF para construir el Excel son:
+                    <br>
+                    <ol>
+                        <li>Generame una cita de este documento</li>
+                        <li>¿Cuál es el título del documento?</li>
+                        <li>¿Cuál es el tema del documento?</li>
+                        <li>¿Cuál es el problema de la investigación?</li>
+                        <li>¿Cuál es el objetivo de la investigación?</li>
+                    </ol>
+                </div>
+            </div>-->
+            <div class="card">
+                <div class="card-body">
+                    Las preguntas que se deben enviar en ChatPDF para construir el Excel son:
+                    <br>
+                    <ol>
+                        <li>Generate a citation for this article</li>
+                        <li>What is the title of the article?</li>
+                        <li>What is the topic of the article?</li>
+                        <li>What is the research problem?</li>
+                        <li>What is the objective of the research?</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Citation</th>
+                        <th>Document title</th>
+                        <th>Topic</th>
+                        <th>Research problem</th>
+                        <th>Research objetive</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for introduction in introductions %}
+                    <tr>
+                        <td>{{ introduction.citation }}</td>
+                        <td>{{ introduction.article_title }}</td>
+                        <td>{{ introduction.topic }}</td>
+                        <td>{{ introduction.research_problem }}</td>
+                        <td>{{ introduction.research_objetive }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

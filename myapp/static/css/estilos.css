@@ -1,0 +1,220 @@
+/**
+GRIS: #63637D
+MORADO: #7A7ABD
+*/
+
+body {
+    overflow-x: hidden;
+    font-family: "Poppins", sans-serif;
+}
+
+.container {
+    margin-top: 3em;
+}
+
+.link-unimath {
+    color: #63637D;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease-in;
+}
+
+.link-unimath:hover {
+    transform: scale(1.1);
+    color: #7A7ABD;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #000000 #FFFFFF;
+    padding: 0;
+    margin: 0;
+}
+
+*::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #FFFFFF;
+}
+
+*::-webkit-scrollbar-track:hover {
+    background-color: #F9F9F9;
+}
+
+*::-webkit-scrollbar-track:active {
+    background-color: #FFFFFF;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #7A7ABD;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #7A7ABD;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #7A7ABD;
+}
+
+.img-logo {
+    width: 100px;
+    margin-top: 5px;
+}
+
+.nav {
+    width: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    /*align-items: center;*/
+    height: 4.5em;
+    padding: 1em 0;
+    position: sticky;
+    -webkit-box-shadow: -1px 10px 33px -16px rgba(0,0,0,0.26);
+    -moz-box-shadow: -1px 10px 33px -16px rgba(0,0,0,0.26);
+    box-shadow: -1px 10px 33px -16px rgba(0,0,0,0.26);
+}
+
+.nav>.nav-header {
+    flex: 0.95;
+    padding-left: 4em;
+}
+
+.nav>.nav-header>.nav-title {
+    font-size: 22px;
+    color: #fff;
+}
+
+.nav>.nav-list {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+    position: relative;
+}
+
+.nav>.nav-list>li {
+    list-style-type: none;
+}
+
+.nav>.nav-list>li a {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.nav>#nav-check {
+    display: none;
+}
+
+.nav a {
+    display: block;
+}
+
+.nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+}
+
+/* Hide Dropdowns by Default */
+.nav ul ul {
+    display: none;
+    position: absolute;
+    top: 2em;
+    padding: 10px;
+    background: #FFF;
+    z-index: 100;
+    box-shadow: 0 .125rem .10rem rgba(0, 0, 0, .075) !important;
+}
+
+/* Display Dropdowns on Hover */
+.nav ul li:hover>ul {
+    display: inherit;
+}
+
+/* Fisrt Tier Dropdown */
+.nav ul ul li {
+    width: 170px;
+    float: none;
+    display: list-item;
+    position: relative;
+    margin: 8px 0;
+}
+
+/* Second, Third and more Tiers	*/
+.nav ul ul ul li {
+    position: relative;
+    top: -60px;
+    left: 170px;
+}
+
+.nav ul ul li a {
+    color: #000 !important;
+}
+
+/* Change this in order to change the Dropdown symbol */
+li>a:only-child:after {
+    content: '';
+}
+
+@media (max-width: 480px) {
+    .nav {
+        padding: 1rem;
+    }
+
+    .nav>.nav-btn {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding-top: 0.2rem;
+    }
+
+    .nav>.nav-btn>label {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        padding: 13px;
+    }
+
+    .nav>.nav-btn>label>span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 2px solid #eee;
+    }
+
+    .nav>.nav-list {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        background-color: #FF914D;
+        height: 0;
+        transition: all 0.3s ease-in;
+        top: 50px;
+        left: 0;
+        overflow: hidden;
+    }
+
+    .nav>.nav-list>li {
+        width: 100%;
+        margin-top: 1.5rem;
+    }
+
+    .nav>.nav-list>li a {
+        color: #FFFFFF;
+    }
+
+    .nav>#nav-check:checked~.nav-list {
+        height: calc(100vh - 50px);
+    }
+}
