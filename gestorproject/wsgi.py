@@ -1,5 +1,5 @@
 """
-WSGI config for chatdoctorado project.
+WSGI config for gestorproject project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chatdoctorado.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gestorproject.settings')
 
 application = get_wsgi_application()

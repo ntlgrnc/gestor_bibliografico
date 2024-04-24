@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from django.http import HttpResponse
 from django.db import IntegrityError
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import Users, Introduction
+from .forms import CustomUserCreationForm
 import re, os
 
 # Create your views here.
@@ -14,9 +15,22 @@ def index(request):
     })
 
 def signup(request):
-    return render(request, 'registro.html', {
-        'form': UserCreationForm
-    })
+    if request.method == 'GET':
+        return render(request, 'registro.html', {
+            'form': CustomUserCreationForm
+        })
+    elif request.method == 'POST':
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                user = User.objects.create_user(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], password=request.POST['password1'])
+                user.save()
+                return HttpResponse('Usuario creado correctamente')
+            except:
+                return HttpResponse('El usuario ya existe')
+            
+        return HttpResponse('Las contraseñas no coinciden')    
+
+
 
 def users(request):
     users = Users.objects.all()
@@ -68,7 +82,7 @@ def createIntroduction(request):
             try:
                 i.save()
                 introductions = Introduction.objects.all()
-                return render(request, 'index.html', {'introductions': introductions})
+                return redirect(to='inicio')
             except IntegrityError as e:
                 print(f"Error al guardar el objeto: {e}")
             except Exception as e:
