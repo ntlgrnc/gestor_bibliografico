@@ -1,80 +1,242 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-<div class="container">
-    <h3>Lector y generador de la plantilla del archivo introducción</h3>
-    <br>
+<div class="container-fluid px-5 py-4">
+    <h3><b>Generador de plantilla</b></h3>
     <div class="row mb-5">
-        <div class="col-8">
-            <p>Has iniciado cómo: Natalia Garnica</p>
-            <br><br>
-            <form action="{% url 'createIntroduction' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="hidden" name="id_usuario" value="1">
-                <div class="mb-3">
-                    <div>
-                        <label for="formFile" class="form-label">Carga aquí tu archivo de texto</label>
-                        <input class="form-control" id="formFile" name="archivo" type="file">
-                      </div>
-                </div>
-                <button class="btn btn-info text-light" type="submit">Cargar</button>
-            </form>
-        </div>
-        <div class="col-4">
-            <!--<div class="card">
+        <div class="col-12">
+            <div class="card border-light mt-3 shadow">
                 <div class="card-body">
-                    Las preguntas que se deben enviar en ChatPDF para construir el Excel son:
-                    <br>
-                    <ol>
-                        <li>Generame una cita de este documento</li>
-                        <li>¿Cuál es el título del documento?</li>
-                        <li>¿Cuál es el tema del documento?</li>
-                        <li>¿Cuál es el problema de la investigación?</li>
-                        <li>¿Cuál es el objetivo de la investigación?</li>
-                    </ol>
-                </div>
-            </div>-->
-            <div class="card">
-                <div class="card-body">
-                    Las preguntas que se deben enviar en ChatPDF para construir el Excel son:
-                    <br>
-                    <ol>
-                        <li>Generate a citation for this article</li>
-                        <li>What is the title of the article?</li>
-                        <li>What is the topic of the article?</li>
-                        <li>What is the research problem?</li>
-                        <li>What is the objective of the research?</li>
-                    </ol>
+                    <form action="{% url 'createAnalisis' %}" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                            <div class="col-10">
+                                {% csrf_token %}
+                                <input type="hidden" name="id_usuario" value="{{ user.id }}">
+                                <div class="mb-4">
+                                    <div>
+                                        <label for="formFile" class="form-label">Carga aquí tu archivo de texto</label>
+                                        <input class="form-control" id="formFile" name="archivo" type="file" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="lenguaje_texto"
+                                            id="lenguaje_texto1" value="es" checked>
+                                        <label class="form-check-label" for="lenguaje_texto1">Texto en español</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="lenguaje_texto"
+                                            id="lenguaje_texto2" value="en">
+                                        <label class="form-check-label" for="lenguaje_texto2">Texto en inglés</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <p style="margin-bottom: 0.5em;">&nbsp;</p>
+                                <button class="btn-gestor text-light" type="submit">Cargar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Citation</th>
-                        <th>Document title</th>
-                        <th>Topic</th>
-                        <th>Research problem</th>
-                        <th>Research objetive</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for introduction in introductions %}
-                    <tr>
-                        <td>{{ introduction.citation }}</td>
-                        <td>{{ introduction.article_title }}</td>
-                        <td>{{ introduction.topic }}</td>
-                        <td>{{ introduction.research_problem }}</td>
-                        <td>{{ introduction.research_objetive }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <div class="col-8">
+            <p class="fw-bold">Archivos guardados <a href="{% url 'exportarAnalisis' %}" class="btn btn-success btn-sm" style="margin-left: 1em;"><i class="fa-regular fa-file-excel"></i> Exportar archivo</a></p>
+            <div class="accordion" id="accordionExample">
+                {% for data in analisis %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading-{{ forloop.counter }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse-{{ forloop.counter }}" aria-expanded="false"
+                            aria-controls="collapse-{{ forloop.counter }}">
+                            {{ data.titulo_articulo }}
+                        </button>
+                    </h2>
+                    <div id="collapse-{{ forloop.counter }}" class="accordion-collapse collapse"
+                        aria-labelledby="heading-{{ forloop.counter }}" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <b>Cita:</b> {{ data.citacion }} <br>
+                            <b>Título:</b> {{ data.titulo_articulo }} <br>
+                            <b>Ubicación:</b> {{ data.ubicacion }} <br>
+                            <b>Resumen:</b> {{ data.resumen }} <br>
+                            <b>Tema del articulo:</b> {{ data.tema }} <br>
+                            <b>Problema de investigación:</b> {{ data.invest_problema }} <br>
+                            <b>Objetivo/s de investigación:</b> {{ data.objetivos }} <br>
+                            <b>Referencias teóricas:</b> {{ data.referentes_teoricos }} <br>
+                            <b>Tipo de metodología:</b> {{ data.tipo_metodologia }} <br>
+                            <b>Diseño de la metodología:</b> {{ data.diseno_metodologia }} <br>
+                            <b>Metodología:</b> {{ data.metodologia }} <br>
+                            <b>Resultados de estudio:</b> {{ data.resultados }} <br>
+                            <b>Conclusión:</b> {{ data.conclusiones }} <br><br>
+                            <a href="{% url 'deleteAnalisis' id=data.id %}" class="btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i> Borrar</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card border-light shadow">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Ten en cuenta</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Debes copiar y pegar tal cual en ChatPDF las preguntas de
+                        abajo. <br> El código es sensible a mayúsculas y tildes por eso debes copiar y pegar:</h6>
+                    <p class="card-text">
+                    <ol id="lista-ingles" style="display: none;">
+                        <li>Generate a citation for this article <a href="#" onclick="copiarPortapapeles(1,'en')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>What is the title of the article? <a href="#" onclick="copiarPortapapeles(2,'en')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>What is the ubication of the article? <a href="#" onclick="copiarPortapapeles(3,'en')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>Give me the textual summary or abstract of the article <a href="#"
+                                onclick="copiarPortapapeles(4,'en')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>What is the topic of the article? <a href="#" onclick="copiarPortapapeles(5,'en')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>What is the research problem or what will this study solve? <a href="#"
+                                onclick="copiarPortapapeles(6,'en')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>What is the objective of the research? Can be one or many <a href="#"
+                                onclick="copiarPortapapeles(7,'en')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>Give me the theoretical references of the study <a href="#"
+                                onclick="copiarPortapapeles(8,'en')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>What is the type of the methodology? It's quantitative, qualitative or mixed? <a href="#"
+                                onclick="copiarPortapapeles(9,'en')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>Taking into account the type of methodology, is it qualitative documentary, quantitative
+                            experimental or quantitative correlational? <a href="#"
+                                onclick="copiarPortapapeles(10,'en')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>What is the study methodology and its research paradigm? <a href="#"
+                                onclick="copiarPortapapeles(11,'en')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>What are the results of the study? <a href="#" onclick="copiarPortapapeles(12,'en')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>What is the conclusion of the study? <a href="#" onclick="copiarPortapapeles(13,'en')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                    </ol>
+                    <ol id="lista-espanol">
+                        <li>Genera una cita para este articulo <a href="#" onclick="copiarPortapapeles(1,'es')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cual es el titulo del articulo? <a href="#" onclick="copiarPortapapeles(2,'es')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cual es la ubicacion geografica (pais) del articulo? <a href="#"
+                                onclick="copiarPortapapeles(3,'es')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>Dame el resumen textual o abstract del articulo <a href="#"
+                                onclick="copiarPortapapeles(4,'es')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cual es el tema del articulo? <a href="#" onclick="copiarPortapapeles(5,'es')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cual es el problema de investigacion o que resolvera este estudio? <a href="#"
+                                onclick="copiarPortapapeles(6,'es')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cual es el objetivo de la investigacion? Puede ser uno o varios <a href="#"
+                                onclick="copiarPortapapeles(7,'es')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>Dame las referencias teoricas del estudio <a href="#"
+                                onclick="copiarPortapapeles(8,'es')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cual es el tipo de metodologia? ¿Es cuantitativa, cualitativa o mixta? <a href="#"
+                                onclick="copiarPortapapeles(9,'es')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>Teniendo en cuenta el tipo de metodologia, ¿es documental cualitativa, experimental
+                            cuantitativa o correlacional cuantitativa? <a href="#"
+                                onclick="copiarPortapapeles(10,'es')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cual es la metodologia del estudio y su paradigma de investigacion? <a href="#"
+                                onclick="copiarPortapapeles(11,'es')"><i class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cuales son los resultados del estudio? <a href="#" onclick="copiarPortapapeles(12,'es')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cual es la conclusion del estudio? <a href="#" onclick="copiarPortapapeles(13,'es')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                    </ol>
+                    </p>
+                    <input id="copytoclipboard" type="text" value="" style="position: absolute;top: -1000px;">
+                </div>
+            </div>
         </div>
     </div>
 </div>
-    
+
+<script>
+    $('#lenguaje_texto1').on('click', function () {
+        $('#lista-espanol').toggle('slow');
+        $('#lista-ingles').toggle('slow');
+    });
+
+    $('#lenguaje_texto2').on('click', function () {
+        $('#lista-ingles').toggle('slow');
+        $('#lista-espanol').toggle('slow');
+    });
+
+    function copiarPortapapeles(numero, idioma) {
+
+        // Objeto con los textos en inglés
+        var textosEn = {
+            1: 'Generate a citation for this article',
+            2: 'What is the title of the article?',
+            3: 'What is the ubication of the article?',
+            4: 'Give me the textual summary or abstract of the article',
+            5: 'What is the topic of the article?',
+            6: 'What is the research problem or what will this study solve?',
+            7: 'What is the objective of the research? Can be one or many',
+            8: 'Give me the theoretical references of the study',
+            9: "What is the type of the methodology? It's quantitative, qualitative or mixed?",
+            10: 'Taking into account the type of methodology, is it qualitative documentary, quantitative experimental or quantitative correlational?',
+            11: 'What is the study methodology and its research paradigm?',
+            12: 'What are the results of the study?',
+            13: 'What is the conclusion of the study?',
+        };
+
+        // Objeto con los textos en español
+        var textosEs = {
+            1: 'Generar una cita para este articulo',
+            2: '¿Cual es el titulo del articulo?',
+            3: '¿Cual es la ubicacion del articulo?',
+            4: 'Dame el resumen textual o abstracto del articulo',
+            5: '¿Cual es el tema del articulo?',
+            6: '¿Cual es el problema de investigacion o que resolvera este estudio?',
+            7: '¿Cual es el objetivo de la investigacion? Puede ser uno o varios',
+            8: 'Dame las referencias teoricas del estudio',
+            9: '¿Cual es el tipo de metodologia? ¿Es cuantitativa, cualitativa o mixta?',
+            10: 'Teniendo en cuenta el tipo de metodologia, ¿es documental cualitativa, experimental cuantitativa o correlacional cuantitativa?',
+            11: '¿Cual es la metodologia del estudio y su paradigma de investigacion?',
+            12: '¿Cuales son los resultados del estudio?',
+            13: '¿Cual es la conclusion del estudio?'
+        };
+
+        // Determinar el objeto de textos según el idioma
+        var textos;
+        if (idioma === 'en') {
+            textos = textosEn;
+        } else if (idioma === 'es') {
+            textos = textosEs;
+        } else {
+            console.error("Idioma no válido");
+            return;
+        }
+
+        var texto = textos[numero];
+        if (!texto) {
+            console.error("Número no válido");
+            return;
+        }
+
+        $('#copytoclipboard').val(texto);
+        $('#copytoclipboard').select();
+        document.execCommand("copy");
+
+        // Eliminar el textarea temporal
+
+        $.dialog({
+            backgroundDismiss: true,
+            content: 'Copiado al portapapeles!',
+            title: false,
+            cancelButton: false,
+            animation: 'scale',
+            animationSpeed: 400,
+            animationBounce: 1.5,
+        });
+        setTimeout(function () {
+            $('.jconfirm').remove();
+            $('#copytoclipboard').val('');
+        }, 1000)
+    }
+</script>
+
 {% endblock %}

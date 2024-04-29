@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Users(models.Model):
@@ -10,10 +11,21 @@ class Users(models.Model):
     def __str__(self):
         return self.nombres + self.apellidos
 
-class Introduction(models.Model):
-    id_usuario = models.ForeignKey(Users, on_delete=models.CASCADE)
-    citation = models.TextField()  
-    article_title = models.CharField(max_length=255)
-    topic = models.TextField()
-    research_problem = models.TextField()
-    research_objetive = models.TextField() 
+class CargaAnalisis(models.Model):
+    id_usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='id_usuario')
+    citacion = models.TextField()
+    tema = models.TextField()
+    invest_problema = models.TextField()
+    invest_objetivo = models.TextField() 
+    ubicacion = models.CharField(max_length=255)
+    titulo_articulo = models.TextField()
+    resumen = models.TextField()
+    problema = models.TextField()
+    objetivos = models.TextField()
+    referentes_teoricos = models.TextField()
+    tipo_metodologia = models.CharField(max_length=100)
+    diseno_metodologia = models.CharField(max_length=100)
+    metodologia = models.TextField()
+    resultados = models.TextField()
+    conclusiones = models.TextField()
+    lenguaje_texto = models.CharField(max_length=10)

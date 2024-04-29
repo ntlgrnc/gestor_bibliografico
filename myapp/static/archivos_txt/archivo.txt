@@ -1,31 +1,78 @@
-PDF: Hello and welcome to this informative PDF file on the investigation of air pollution mitigation measures, ventilation, and indoor air quality at three schools in London! This study highlights the effectiveness of green screens, air purifiers, and school street interventions in reducing outdoor and indoor particle concentrations, as well as the importance of effective ventilation in maintaining good indoor air quality.
+PDF: Hello and welcome to this informative PDF file on the impacts of urban agriculture on health determinants! This scoping review explores the positive effects of urban agriculture on food security, nutrition outcomes, physical and mental health, and social capital. 
 
-1. How did the green screen at the school boundary contribute to reducing outdoor particle levels?
-2. What were the findings regarding the use of air purifiers in classrooms to reduce indoor particle concentrations?
-3. How did high occupancy levels impact PM10 and CO2 levels in classrooms, and what measures were recommended to address this issue?
+1. What are some of the key benefits of urban agriculture reported in the quantitative studies?
+2. How do qualitative studies contribute to our understanding of the motivations and perceived benefits of urban agriculture?
+3. What are some of the knowledge gaps identified in this scoping review for future urban agriculture studies?
 
-Me: generate a citation for this article?
+Me: Genera una cita para este articulo
 
-PDF: Abhijith, K.V., Kukadia, V., Kumar, P. (2022). Investigation of air pollution mitigation measures, ventilation, and indoor air quality at three schools in London. Atmospheric Environment, 289, 119303.
+PDF: Audate, P.P., et al. "Impacts of Urban Agriculture on Health Determinants: A Scoping Review." BMC Public Health, vol. 19, 2019, p. 672.
 
-Me: generate a citation for this article
+Me: ¿Cual es el titulo del articulo?
 
-PDF: Abhijith, K.V., Kukadia, V., & Kumar, P. (2022). Investigation of air pollution mitigation measures, ventilation, and indoor air quality at three schools in London. Atmospheric Environment, 289, 119303. https://doi.org/10.1016/j.atmosenv.2022.119303
+PDF: El título del artículo es "Scoping review of the impacts of urban agriculture on the determinants of health".
 
-Me: what is the title of the article?
+Me: ¿Cual es la ubicacion del articulo?
 
-PDF: The title of the article is "Investigation of air pollution mitigation measures, ventilation, and indoor air quality at three schools in London."
+PDF: El artículo se encuentra en la revista BMC Public Health, volumen 19, página 672.
 
-Me: what is the topic of the article?
+Me: ¿Cual es la ubicacion geografica del articulo?
 
-PDF: The topic of the article is focused on investigating air pollution mitigation measures, ventilation strategies, and indoor air quality at three schools in London.
+PDF: El artículo fue realizado por autores afiliados a la Universidad Laval en Quebec, Canadá.
 
-Me: what is the research problem?
+Me: ¿Cual es la ubicacion geografica (pais) del articulo?
 
-PDF: The research problem addressed in the article is the extent of air pollution issues inside and around schools in urban areas, particularly in London, and the factors influencing indoor air quality. The study aims to understand the impact of air pollution on schools, explore interventions to mitigate air pollution exposure, and assess the effectiveness of these interventions in improving indoor and outdoor air quality at schools.
+PDF: El artículo fue realizado por autores afiliados a instituciones en Canadá, por lo tanto, la ubicación geográfica del articulo es Canadá.
 
-Me: what is the objective of the research?
+Me: Dame el resumen textual o abstract del articulo
 
-PDF: The main objectives of the research are:
-1. To obtain a clearer understanding of the extent of the air pollution problem inside and around schools in urban areas, particularly in London.
-2. To determine effective ways to mitigate air pollution exposure by investigating a range of interventions, such as green screens, air purifiers, and school streets, and monitoring air pollution and associated parameters in and around three primary schools in London.
+PDF: Lo siento, pero no se proporcionó un resumen textual o abstract del artículo en el documento proporcionado.
+
+Me: Dame el abstract textualmente del texto
+
+PDF: Lo siento, pero no se proporcionó un abstract textual del artículo en el documento proporcionado.
+
+Me: ¿Cual es el tema del articulo?
+
+PDF: El tema del artículo es sobre el impacto de la agricultura urbana en la salud, centrándose en la revisión sistemática de la literatura existente sobre este tema.
+
+Me: ¿Cual es el problema de investigacion o que resolvera este estudio?
+
+PDF: El estudio busca explorar los impactos de la agricultura urbana en los determinantes de la salud, asi como identificar posibles lagunas de conocimiento para investigaciones futuras en este campo.
+
+Me: ¿Cual es el objetivo de la investigacion? Puede ser uno o varios
+
+PDF: El objetivo de la investigación es explorar los impactos de la agricultura urbana en los determinantes de la salud y identificar posibles lagunas de conocimiento para investigaciones futuras en este campo,.
+
+Me: Dame las referencias teoricas del estudio
+
+PDF: Las referencias teóricas del estudio son:
+
+1. Arksey H, O'Malley L. Scoping studies: towards a methodological framework. Int J Soc Res Methodol. 2005;8(1):19–32.
+2. Levac D, Colquhoun H, O'Brien KK. Scoping studies: advancing the methodology. Implement Sci. 2010;5(1):69.
+3. Audate PP, Fernandez MA, Cloutier G, Lebel A. Impacts of urban agriculture on the determinants of health: scoping review protocol. JMIR research protocols. 2018;7(3):e89.
+4. O'Connor D, Green S, Higgins JP. Defining the review question and developing criteria for including studies. In: Cochrane handbook for systematic reviews of interventions: Cochrane book series; 2008. p. 81–94.
+
+Me: ¿Cual es el tipo de metodologia? ¿Es cuantitativa, cualitativa o mixta?
+
+PDF: La metodología utilizada en el estudio es una revisión sistemática de la literatura, lo que implica una metodología principalmente cualitativa al analizar y sintetizar información de estudios previos.
+
+Me: Teniendo en cuenta el tipo de metodologia, ¿es documental cualitativa, experimental cuantitativa o correlacional cuantitativa?
+
+PDF: Dado que se trata de una revisión sistemática de la literatura para explorar los impactos de la agricultura urbana en los determinantes de la salud, la metodología se clasificaría como documental cualitativa, ya que se centra en la recopilación y síntesis de información cualitativa de estudios previos.
+
+Me: ¿Cual es la metodologia del estudio y su paradigma de investigacion?
+
+PDF: El estudio se basa en una revisión sistemática de la literatura, lo que implica la recopilación, síntesis y análisis de información relevante de estudios previos sobre los impactos de la agricultura urbana en los determinantes de la salud. En cuanto al paradigma de investigación, al tratarse de una revisión sistemática de la literatura, no se especifica un paradigma de investigación en particular, ya que su enfoque principal es la recopilación y síntesis de evidencia existente en lugar de la generación de nueva evidencia a través de un enfoque experimental o de investigación primaria.
+
+Me: ¿Cuales son los resultados del estudio?
+
+PDF: Los resultados del estudio incluyen la identificación de una diversidad de evidencia en la literatura sobre los impactos de la agricultura urbana en los determinantes de la salud. Se menciona que existen beneficios reportados, así como posibles impactos adversos, pero se destaca la falta de consideración de estos últimos en revisiones anteriores. Además, se señala una limitación en la diversidad de contextos socioeconómicos y alcance geográfico en los estudios primarios incluidos en las revisiones.
+
+Además, se menciona que se identificaron un total de 101 artículos relevantes para la revisión, los cuales fueron sometidos a extracción de datos, evaluación de calidad y elaboración de un informe narrativo de los hallazgos.
+
+Me: ¿Cual es la conclusion del estudio?
+
+PDF: La conclusión del estudio destaca que, a pesar de la falta de consistencia y la falta de calidad metodológica en los estudios incluidos, existe evidencia sustancial que respalda que la agricultura urbana puede influir en diferentes determinantes de la salud, como la seguridad alimentaria, el capital social, la salud y el bienestar en diversos contextos. Se menciona que, a pesar de los beneficios sociales, físicos y mentales de la agricultura urbana, se necesitan estudios más rigurosos para demostrar los impactos positivos y adversos en los determinantes de la salud. A pesar de las preocupaciones sobre la contaminación del suelo urbano, se sugiere que la agricultura urbana puede recomendarse como una intervención que influye positivamente en los determinantes de la salud.
+
+Además, se resalta la necesidad de realizar estudios más rigurosos para demostrar los impactos de la agricultura urbana en los resultados relacionados con la salud, así como la posibilidad de explorar enfoques de investigación transnacionales y multi-ciudad para enriquecer la comprensión en diferentes contextos. Se menciona que esta revisión invita a los profesionales y responsables de políticas a abordar los desafíos de la agricultura urbana mientras la promueven, y se destaca la importancia de realizar pruebas en los suelos urbanos antes de cultivar productos de la agricultura urbana.

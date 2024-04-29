@@ -50,7 +50,7 @@ DODGER BLUE: #1E90FF
 
 .bloque2 {
     width: 50vw;
-    padding: 30px 50px 30px;
+    padding: 20px 50px 30px;
 }
 
 .iniciar-sesion {
@@ -87,7 +87,7 @@ DODGER BLUE: #1E90FF
 }
 
 form > div {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 form > div, form > div > label {
@@ -96,12 +96,13 @@ form > div, form > div > label {
 
 label {
     font-weight: bold;
+    font-size: 13px;
 }
 
 input {
     border: 1px solid #D3D3D3;
     border-radius: 6px;
-    padding: 5px 10px;
+    padding: 3px 10px;
     width: 30vw;
 }
 

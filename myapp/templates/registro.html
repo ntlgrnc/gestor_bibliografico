@@ -20,21 +20,21 @@
         <div class="bloque2">
             <div class="iniciar-sesion">
                 <p>¿Ya tienes una cuenta?</p>
-                <a href="#" class="btn-registro">Inicia sesión</a>
+                <a href="{% url 'signin' %}" class="btn-registro">Inicia sesión</a>
             </div>
             <div class="titulo">
-                <h2>
+                <h4>
                     Te damos la bienvenida a Gestor <br>
-                </h2>
-                <h6>La app de gestión de fichas bibliográficas</h6>
+                </h4>
                 <p class="sub">Crea una cuenta para poder hacer uso de esta grandiosa herramienta.</p>
             </div>
             <div class="formulario">
+                {{error}}
                 <form action="" method="POST">
                     {% csrf_token %}
                     {{ form.as_div }}
                     <div>
-                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Registrarse</button>
                     </div>
                 </form>
             </div>
