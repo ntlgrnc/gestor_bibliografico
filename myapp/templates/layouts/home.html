@@ -2,12 +2,86 @@
 {% load static %}
 
 {% block extrastyles %}
-<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="container text-center">
-    <h1>Herramienta gestor</h1>
-    <p>aún en construcción :)</p>
+    <h1 class="text-center fw-bold">Bienvenido a la herramienta gestor</h1>
+    <p>Gestor es una herramienta diseñada para optimizar tu trabajo en la creación de documentos bibliógraficos para la
+        gestión de plantillas con referencias de artículos universitarios y científicos</p>
+
+    <div class="row my-5">
+        <div class="col-6">
+            <div class="card border-light mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{% static 'images/numero-1.png' %}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-start" style="color: #7A7ABD;">Primer paso</h5>
+                            <p class="card-text text-start">Create una cuenta para poder acceder a la herramienta.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card border-light mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{% static 'images/numero-2.png' %}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-start" style="color: #7A7ABD;">Segundo paso</h5>
+                            <p class="card-text text-start">Debes iniciar la aplicación <a class="fw-bold"
+                                    href="https://www.chatpdf.com">ChatPDF</a> y hacerle las preguntas que encuentras en
+                                la pantalla de la herramienta. Debes utilizar el botón de copiar texto <i
+                                    class="fa-regular fa-copy"></i> y pegar en el chat la pregunta tal cual, <b>sin
+                                    modificaciones</b>. <br>
+                                <b>NOTA:</b> Si el documento no está en español, si le das clic en el botón de texto en inglés, te cambia el contenido al idioma en inglés para que puedas pegarlo y coincida correctamente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card border-light mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{% static 'images/numero-3.png' %}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-start" style="color: #7A7ABD;">Tercer paso</h5>
+                            <p class="card-text text-start">Una vez hayas copiado todas las preguntas y obtenido la
+                                respuesta, debes descargar el chat, esto se realiza en la parte superior derecha del
+                                chat en el ícono <i class="fa-solid fa-download"></i>. Una vez se descargue puedes
+                                regresar a la herramienta.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card border-light mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{% static 'images/numero-4.png' %}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-start" style="color: #7A7ABD;">Cuarto paso</h5>
+                            <p class="card-text text-start">
+                                Debes cargar el archivo en el campo que te pide seleccionar archivo, debe ser el mismo que descargaste de ChatPDF, además, si el chat fue en español o en inglés, antes de darle al botón cargar <b>debes seleccionar en qué idioma está el archivo de texto</b> y así evitar que falle la carga.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

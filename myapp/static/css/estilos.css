@@ -157,6 +157,10 @@ footer {
     display: inherit;
 }
 
+.img-fluid {
+    max-width: 50% !important;
+}
+
 /* Fisrt Tier Dropdown */
 .nav ul ul li {
     width: 170px;

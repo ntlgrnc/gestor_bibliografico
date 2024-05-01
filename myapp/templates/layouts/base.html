@@ -58,6 +58,7 @@
         <ul class="nav-list">
             <!--<li><a href="#">Iniciar chat</a></li>-->
             {% if user.is_authenticated %}
+            <li><a href="{% url 'herramienta' %}">Herramienta</a></li>
             <li><a href="{% url 'verPerfil' %}"><i class="fa-regular fa-user"></i> {{ user.first_name }}</a></li>
             <li><a href="{% url 'soporte' %}"><i class="fa-solid fa-headset"></i> Soporte</a></li>
             <li><a href="{% url 'signout' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
