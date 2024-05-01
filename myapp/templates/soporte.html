@@ -2,32 +2,64 @@
 {% load static %}
 
 {% block extrastyles %}
-<link rel="stylesheet" href="{% static 'css/iniciosesion.css' %}">
+<link rel="stylesheet" href="{% static 'css/soporte.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <h4>Enviar reporte de caso de ayuda</h4>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div>
-            {{ form.titulo_mensaje.label_tag }}
-            {{ form.titulo_mensaje }}
+    <div class="row">
+        <div class="col-6">
+            <h4>Enviar reporte de caso de ayuda</h4>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    {{ form.titulo_mensaje.label_tag }}
+                    {{ form.titulo_mensaje }}
+                </div>
+                <div>
+                    {{ form.cuerpo_mensaje.label_tag }}
+                    {{ form.cuerpo_mensaje }}
+                </div>
+                <div>
+                    <div class="file-input-container">
+                        <label for="sm-ip-1" class="for-sm-input-file">{{ form.adjuntos.label }}</label>
+                        {{ form.adjuntos }}
+                        <span class="span-text" id="file-name"></span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-gestor">Enviar</button>
+            </form>
         </div>
-        <div>
-            {{ form.cuerpo_mensaje.label_tag }}
-            {{ form.cuerpo_mensaje }}
+        <div class="col-6">
+            <h4>Casos registrados</h4>
+            {% if soportes %}
+            {% for soporte in soportes %}
+                <div class="card border-light mb-3 shadow-sm" style="width: 34rem;">
+                    <div class="card-body">
+                        {% if soporte.estado == 'Enviado' %}
+                        <span class="badge bg-info text-dark">Enviado</span><br>
+                        {% endif %}
+                        {% if soporte.estado == 'En revisión' %}
+                        <span class="badge bg-warning text-dark">En revisión</span><br>
+                        {% endif %}
+                        {% if soporte.estado == 'Corregido' %}
+                        <span class="badge bg-success">Corregido</span><br>
+                        {% endif %}
+
+                        <h6 class="card-title">{{ soporte.titulo_mensaje }}</h6>
+                        <p class="card-subtitle mb-2 text-muted" style="font-size: 11px;">Subido a las {{ soporte.fecha_creacion }}</p>
+                        <p class="card-text" style="font-size: 13px;">
+                            {{ soporte.cuerpo_mensaje }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+            <p>No hay registros disponibles.</p>
+            {% endif %}
         </div>
-        <div>
-            <div class="file-input-container">
-                <label for="sm-ip-1" class="for-sm-input-file">{{ form.adjuntos.label }}</label>
-                {{ form.adjuntos }}
-                <span class="span-text" id="file-name"></span>
-            </div>
-        </div>
-        
-        <button type="submit" class="btn-gestor">Enviar</button>
-    </form>
+    </div>
 </div>
 
 {% endblock %}
@@ -48,7 +80,21 @@
         buttons: {
             Cerrar: function () {
                 $('.jconfirm').remove();
-                location.reload()
+                location.href = '/soporte'
+            }
+        }
+    });
+</script>
+{% elif mensaje == False %}
+<script type="text/javascript">
+    $.confirm({
+        title: 'Ocurrió un error',
+        content: 'No se registró correctamente tu caso, contacta al administrador',
+        type: 'red',
+        typeAnimated: true,
+        buttons: {
+            Cerrar: function () {
+                $('.jconfirm').remove();
             }
         }
     });

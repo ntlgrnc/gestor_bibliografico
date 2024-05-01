@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='1234')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -82,13 +82,13 @@ WSGI_APPLICATION = 'gestorproject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'gestor_bibliografico',
-    #     'USER': 'postgres',
-    #     'PASSWORD': '1234',
-    #     'PORT': '5432'
-    # }
+     #'default': {
+     #    'ENGINE': 'django.db.backends.postgresql',
+     #    'NAME': 'gestor_bibliografico',
+     #    'USER': 'postgres',
+     #    'PASSWORD': '1234',
+     #    'PORT': '5432'
+     #}
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 

@@ -40,7 +40,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 class MensajesSoporteForm(forms.ModelForm):
     titulo_mensaje = forms.CharField(label='Asunto', required=True, widget=forms.TextInput(attrs={'autocomplete': 'off'}))
     cuerpo_mensaje = forms.CharField(label='Descripción', required=True, widget=forms.Textarea(attrs={'rows': 5}))
-    adjuntos = forms.ImageField(label='Subir imagen', widget=forms.FileInput(attrs={
+    adjuntos = forms.ImageField(label='Subir imagen', required=False, widget=forms.FileInput(attrs={
         'accept': 'image/*',
         'class': 'sm-input-file',
         'id': 'sm-ip-1'

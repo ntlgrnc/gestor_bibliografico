@@ -65,14 +65,8 @@ def signout(request):
 def home(request):
     return render(request,'layouts/home.html')
 
-def users(request):
-    users = Users.objects.all()
-    return render(request, 'usuarios.html', {
-        'users': users
-    })
-
 def getUser(request, id):
-    user = get_object_or_404(Users, id = id)
+    user = get_object_or_404(User, id = id)
     return HttpResponse("Nombres usuario: %s " % user.nombres)
 
 def createAnalisis(request):
@@ -178,13 +172,15 @@ def createAnalisis(request):
                 )
             try:
                 i.save()
-                analisis = CargaAnalisis.objects.all(id_usuario=usuario)
+                #analisis = CargaAnalisis.objects.all(id_usuario=usuario)
                 return redirect(to='inicio')
             except IntegrityError as e:
-                print(f"Error al guardar el objeto: {e}")
+                contenido = f"<p>No se pudo guardar la peticion: {str(e)}</p><a href='/'>Volver</a>"
+                return HttpResponse(content=contenido,content_type='text/html')
             except Exception as e:
                 # Capturar cualquier otra excepción
-                print(f"Error desconocido al guardar el objeto: {e}")         
+                contenido = f"<p>Error desconocido. No se pudo guardar: {str(e)}</p><a href='/'>Volver</a>"
+                return HttpResponse(content=contenido,content_type='text/html')      
 
 def obtenerRespuesta(patron, contenido):
     match = re.search(patron, contenido, re.DOTALL)
@@ -253,13 +249,21 @@ def soporte(request):
         if form.is_valid():
             mensaje = form.save(commit=False)
             mensaje.id_usuario = request.user
+            mensaje.estado = "Enviado"
             mensaje.save()
-            return redirect('soporte')
             guardado_correctamente = True
+            return render(request,'soporte.html', {
+                'mensaje': guardado_correctamente
+            })
+        else:
+            return render(request,'soporte.html', {
+                'mensaje': guardado_correctamente
+            })
     else:
         form = MensajesSoporteForm()
+        soportes = MensajesSoporte.objects.filter(id_usuario=request.user.id)
 
-    return render(request, 'soporte.html', {'form': form, 'mensaje': guardado_correctamente})
+    return render(request, 'soporte.html', {'form': form, 'mensaje': '', 'soportes':soportes})
 
 #Ejemplos
 def ejemploconcatena(request, nombre):
