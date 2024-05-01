@@ -173,7 +173,7 @@ def createAnalisis(request):
             try:
                 i.save()
                 #analisis = CargaAnalisis.objects.all(id_usuario=usuario)
-                return redirect(to='inicio')
+                return redirect(to='herramienta')
             except IntegrityError as e:
                 contenido = f"<p>No se pudo guardar la peticion: {str(e)}</p><a href='/'>Volver</a>"
                 return HttpResponse(content=contenido,content_type='text/html')
