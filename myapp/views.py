@@ -240,7 +240,11 @@ def export_to_excel(request):
     return response
 
 def viewUser(request):
-    return render(request, 'perfil.html')
+    id_usuario = request.user.id
+    cantidad_registros = CargaAnalisis.objects.filter(id_usuario=id_usuario).count()
+    return render(request, 'perfil.html', {
+        'cant_archivos': cantidad_registros
+    })
 
 def soporte(request):
     guardado_correctamente = False
