@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{% static 'images/usuario.png' %}" class="img-fluid rounded-start" alt="Logo de usuario general">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+              <p class="card-text">
+                <b>Correo:</b> {{ user.email }}
+              </p>
+              <p class="card-text"><small class="text-muted">Último inicio de sesión {{ user.last_login }}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="card border-light shadow">
+          <div class="card-body">
+            <b style="font-size: 18px;">3 </b> Archivos subidos
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

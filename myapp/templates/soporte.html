@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+<link rel="stylesheet" href="{% static 'css/iniciosesion.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4>Enviar reporte de caso de ayuda</h4>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            {{ form.titulo_mensaje.label_tag }}
+            {{ form.titulo_mensaje }}
+        </div>
+        <div>
+            {{ form.cuerpo_mensaje.label_tag }}
+            {{ form.cuerpo_mensaje }}
+        </div>
+        <div>
+            <div class="file-input-container">
+                <label for="sm-ip-1" class="for-sm-input-file">{{ form.adjuntos.label }}</label>
+                {{ form.adjuntos }}
+                <span class="span-text" id="file-name"></span>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn-gestor">Enviar</button>
+    </form>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    $('#sm-ip-1').on('change', function (event) {
+        var name = event.target.files[0].name;
+        $('#file-name').text(name);
+    })
+</script>
+{% if mensaje %}
+<script type="text/javascript">
+    $.confirm({
+        title: 'Todo salió bien!',
+        content: 'Se registró correctamente tu caso, podrás ver en tu perfil, los casos reportados y su estado',
+        type: 'green',
+        typeAnimated: true,
+        buttons: {
+            Cerrar: function () {
+                $('.jconfirm').remove();
+                location.reload()
+            }
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}

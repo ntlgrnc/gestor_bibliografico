@@ -1,15 +1,29 @@
 /**
 GRIS: #63637D
 MORADO: #7A7ABD
+LILA: #cfa1cd
 */
 
 body {
     overflow-x: hidden;
     font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     margin-top: 3em;
+}
+
+footer {
+    /*position: relative;
+    bottom: 0;*/
+    background-color: #7209b7;
+    color: #FFF;
+    padding: 20px 500px;
+    width: 100vw;
+    margin-top: auto;
 }
 
 .container-fluid {

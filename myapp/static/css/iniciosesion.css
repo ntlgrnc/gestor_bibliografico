@@ -66,11 +66,12 @@ a {
     font-weight: bold;
 }
 
-form > div {
+form>div {
     margin-bottom: 15px;
 }
 
-form > div, form > div > label {
+form>div,
+form>div>label {
     display: block;
 }
 
@@ -79,7 +80,8 @@ label {
     font-size: 13px;
 }
 
-input {
+input,
+textarea {
     border: 1px solid #D3D3D3;
     border-radius: 6px;
     padding: 3px 10px;
@@ -104,4 +106,59 @@ input {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-30%, -10%);
     margin-bottom: 0;
+}
+
+.file-input-container {
+    display: inline;
+    margin: 2px;
+}
+
+.sm-input-file {
+    border: 1px solid #333;
+    background: #ccc;
+    color: #777;
+    width: 82px;
+    opacity: 0;
+}
+
+.for-sm-input-file {
+    width: 10vw;
+    height: 40px;
+    border: 1px solid #cfa1cd;
+    position: absolute;
+    padding: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 30;
+    text-align: center;
+    left: 100px;
+    color: #cfa1cd;
+    padding-top: 10px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 2px;
+}
+
+.for-sm-input-file:hover {
+    background: #ad81ab;
+    color: #fff;
+}
+
+.span-text {
+    display: inline-flex;
+    padding: 12px;
+    border: 1px solid #cfa1cd;
+    border-radius: 2px;
+    margin-left: 3vw;
+    margin-top: unset;
+    height: 40px;
+    width: 240px;
+    background: #cfa1cd;
+    color: #fff;
+    min-width: 100px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 0px;
 }

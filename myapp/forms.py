@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from .models import MensajesSoporte
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(label='Correo electrónico', max_length=254, help_text='Asegúrate de ingresar un correo electrónico válido.', required=True, widget=forms.TextInput(attrs={'autocomplete': 'off'}))
@@ -35,3 +36,28 @@ class CustomAuthenticationForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         # Eliminar el campo de nombre de usuario
         self.fields.pop('username')    
+
+class MensajesSoporteForm(forms.ModelForm):
+    titulo_mensaje = forms.CharField(label='Asunto', required=True, widget=forms.TextInput(attrs={'autocomplete': 'off'}))
+    cuerpo_mensaje = forms.CharField(label='Descripción', required=True, widget=forms.Textarea(attrs={'rows': 5}))
+    adjuntos = forms.ImageField(label='Subir imagen', widget=forms.FileInput(attrs={
+        'accept': 'image/*',
+        'class': 'sm-input-file',
+        'id': 'sm-ip-1'
+        }))
+
+    def __init__(self, *args, **kwargs):
+        self.id_usuario = kwargs.pop('id_usuario', None)
+        super(MensajesSoporteForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = MensajesSoporte
+        fields = ['titulo_mensaje', 'cuerpo_mensaje', 'adjuntos']
+
+    def save(self, commit=True, id_usuario=None):
+        instance = super(MensajesSoporteForm, self).save(commit=False)
+        if id_usuario:
+            instance.id_usuario = id_usuario
+        if commit:
+            instance.save()
+        return instance

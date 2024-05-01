@@ -1,75 +1,99 @@
-
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor</title>
     <link rel="shortcut icon" href="{% static 'logo-gestor.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    {% block extrastyles %}
+    
+    {% endblock %}
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/regular.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'jquery-confirm-v3.3.4/dist/jquery-confirm.min.css' %}">
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="{% static 'jquery-confirm-v3.3.4/dist/jquery-confirm.min.js' %}"></script>
 </head>
 
-<nav class="nav">
-    <input type="checkbox" id="nav-check">
-    <div class="nav-header">
-        <div class="nav-title">
-            <a href="{% url 'home' %}"><img src="{% static 'images/gestor.png' %}" alt="Logo principal" class="img-logo"></a>
-        </div>
-    </div>
-    <div class="nav-btn">
-        <label for="nav-check">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-    </div>
+<body>
+    <nav class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+            <div class="nav-title">
+                {% if user.is_authenticated %}
+                <a href="{% url 'inicio' %}"><img src="{% static 'images/gestor.png' %}" alt="Logo principal"
+                        class="img-logo"></a>
+                {% else %}
+                <a href="{% url 'home' %}"><img src="{% static 'images/gestor.png' %}" alt="Logo principal"
+                        class="img-logo"></a>
+                {% endif %}
 
-    <ul class="nav-list">
-        <!--<li><a href="#">Iniciar chat</a></li>-->
-        {% if user.is_authenticated %}
-            <li><a href="#"><i class="fa-regular fa-user"></i> {{ user.first_name }}</a></li>
-            <li><a href="#"><i class="fa-solid fa-headset"></i> Soporte</a></li>
-            <li><a href="{% url 'signout' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar sesión"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;</a></li>
-        {% else %}
+            </div>
+        </div>
+        <div class="nav-btn">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+
+        <ul class="nav-list">
+            <!--<li><a href="#">Iniciar chat</a></li>-->
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'verPerfil' %}"><i class="fa-regular fa-user"></i> {{ user.first_name }}</a></li>
+            <li><a href="{% url 'soporte' %}"><i class="fa-solid fa-headset"></i> Soporte</a></li>
+            <li><a href="{% url 'signout' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Cerrar sesión"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;</a></li>
+            {% else %}
             <li><a href="{% url 'signin' %}">Iniciar sesión</a></li>
             <li><a href="{% url 'signup' %}">Registrarse</a></li>
-        {% endif %}
-        
-        
-        <!--<li>
-            <a href="">Sobre nosotros <i class="fas fa-caret-down"></i></a>
-            <ul class="rounded">
-                <li><a href="#">Quienes somos</a></li>
-                <li><a href="#">Contactanos</a></li>
-            </ul>
-        </li>-->
-    </ul>
-</nav>
-
-{% block content %}
-{% endblock %}
+            {% endif %}
 
 
-<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<script type="text/javascript">
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-</script>
-<footer>
-    Todos los derechos reservados &copy;
-</footer>
+            <!--<li>
+                <a href="">Sobre nosotros <i class="fas fa-caret-down"></i></a>
+                <ul class="rounded">
+                    <li><a href="#">Quienes somos</a></li>
+                    <li><a href="#">Contactanos</a></li>
+                </ul>
+            </li>-->
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+    {% block scripts %}
+    
+    {% endblock %}
+    <footer>
+        Todos los derechos reservados &copy;
+    </footer>
+</body>
+
+</html>

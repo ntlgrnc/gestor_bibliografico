@@ -10,8 +10,9 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('signin/', views.signin, name='signin'),
     path('signout/', views.signout, name='signout'),
-
-    path('users/', views.users),
+    path('user/', views.viewUser, name='verPerfil'),
+    path('soporte/', views.soporte, name='soporte'),
+    
     path('getUser/<int:id>', views.getUser),
     # se puede usar int o str como tipo de dato
     path('hola/<str:nombre>', views.ejemploconcatena)

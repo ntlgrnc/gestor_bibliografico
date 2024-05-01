@@ -4,14 +4,15 @@ from django.http import HttpResponse
 from django.db import IntegrityError
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from .models import CargaAnalisis
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .models import CargaAnalisis, MensajesSoporte
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, MensajesSoporteForm
 import re, os
 from openpyxl import Workbook
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    analisis = CargaAnalisis.objects.all()
+    analisis = CargaAnalisis.objects.filter(id_usuario=request.user.id)
 
     return render(request,'index.html', {
         'analisis': analisis
@@ -173,11 +174,11 @@ def createAnalisis(request):
                 resultados = resultados,
                 conclusiones = conclusiones,
                 lenguaje_texto = request.POST['lenguaje_texto'],
-                id_usuario = User.objects.get(id=8)
+                id_usuario = User.objects.get(id=usuario)
                 )
             try:
                 i.save()
-                analisis = CargaAnalisis.objects.all()
+                analisis = CargaAnalisis.objects.all(id_usuario=usuario)
                 return redirect(to='inicio')
             except IntegrityError as e:
                 print(f"Error al guardar el objeto: {e}")
@@ -237,6 +238,24 @@ def export_to_excel(request):
     wb.save(response)
 
     return response
+
+def viewUser(request):
+    return render(request, 'perfil.html')
+
+def soporte(request):
+    guardado_correctamente = False
+    if request.method == 'POST':
+        form = MensajesSoporteForm(request.POST, request.FILES)
+        if form.is_valid():
+            mensaje = form.save(commit=False)
+            mensaje.id_usuario = request.user
+            mensaje.save()
+            return redirect('soporte')
+            guardado_correctamente = True
+    else:
+        form = MensajesSoporteForm()
+
+    return render(request, 'soporte.html', {'form': form, 'mensaje': guardado_correctamente})
 
 #Ejemplos
 def ejemploconcatena(request, nombre):

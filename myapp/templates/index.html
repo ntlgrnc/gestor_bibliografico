@@ -1,4 +1,9 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid px-5 py-4">

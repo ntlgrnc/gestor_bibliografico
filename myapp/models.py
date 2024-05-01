@@ -29,3 +29,11 @@ class CargaAnalisis(models.Model):
     resultados = models.TextField()
     conclusiones = models.TextField()
     lenguaje_texto = models.CharField(max_length=10)
+
+
+class MensajesSoporte(models.Model):
+    id_usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='id_usuario_origen')
+    titulo_mensaje = models.CharField(max_length=255)
+    cuerpo_mensaje = models.TextField()
+    estado = models.CharField(max_length=100)
+    adjuntos = models.ImageField(upload_to='myapp/static/imagenes_soporte/')
