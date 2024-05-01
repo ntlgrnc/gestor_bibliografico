@@ -1,0 +1,109 @@
+/*
+COLOR AZUL CLARO FONDO: #BEE1F5
+DODGER BLUE: #1E90FF
+*/
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: "Poppins", sans-serif;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+.contenedor {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-color: #F0F8FF;
+    padding: 70px 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img-inicio {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img-inicio img {
+    width: 150px;
+    position: relative;
+}
+
+.caja-inicio {
+    background: #FFF;
+    position: relative;
+    width: 35vw;
+    min-height: 50vh;
+    border-radius: 10px;
+    padding: 20px 40px;
+}
+
+.caja-inicio p {
+    font-size: 12px;
+    color: #A9A9A9;
+}
+
+.imagen-registro {
+    width: 500px;
+    margin: 0;
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+form>div {
+    margin-bottom: 15px;
+}
+
+form>div,
+form>div>label {
+    display: block;
+}
+
+label {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+input,
+textarea {
+    border: 1px solid #D3D3D3;
+    border-radius: 6px;
+    padding: 3px 10px;
+    width: 28vw;
+}
+
+.helptext {
+    color: #A9A9A9;
+    font-size: 11px;
+}
+
+.reset-password {
+    position: relative;
+    margin: 30px 0px;
+    width: 100%;
+}
+
+.reset-password p {
+    font-size: 12px;
+    position: relative;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-30%, -10%);
+    margin-bottom: 0;
+}
