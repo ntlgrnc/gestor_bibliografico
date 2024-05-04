@@ -17,24 +17,24 @@
             <img src="{% static 'images/gestor-removebg.png' %}" alt="Logo">
         </div>
         <div class="caja-inicio">
-            <h4>Bienvenido/a de nuevo</h4>
-            <p>Ingresa tus credenciales para acceder a tu cuenta</p>
+            <h4>Recupera tu cuenta</h4>
+            <p>Ingresa el correo electrónico registrado para recibir un correo con un link de activación para que puedas acceder a tu cuenta de nuevo</p>
             {% if error %}
                 <span style="color: red;font-size: 11px;font-weight: bold;">{{ error }}</span>
             {% endif %}
             <form action="" method="POST">
                 {% csrf_token %}
-                {{ form }}
+                <div>
+                    <label for="email_recuperacion">Correo electrónico</label>
+                    <input type="text" name="email" id="email">
+                </div>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="submit">Ingresar</button>
+                    <button class="btn btn-primary" type="submit">Enviar correo</button>
                 </div>
             </form>
-        </div>
-        <div class="reset-password">
-            <p>Olvidaste tu contraseña <a href="{% url 'recuperar_clave' %}">Recuperala aquí</a></p>
-        </div>
-        <div class="reset-password1">
-            <a href="{% url 'home' %}">Volver a inicio</a>
+            <div class="reset-password1">
+                <a href="{% url 'home' %}">Volver a inicio</a>
+            </div>
         </div>
     </div>
 </body>

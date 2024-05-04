@@ -29,6 +29,7 @@ class CargaAnalisis(models.Model):
     resultados = models.TextField()
     conclusiones = models.TextField()
     lenguaje_texto = models.CharField(max_length=10)
+    ref_apa = models.TextField(default="")
 
 
 class MensajesSoporte(models.Model):

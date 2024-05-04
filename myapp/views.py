@@ -8,7 +8,11 @@ from .models import CargaAnalisis, MensajesSoporte
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, MensajesSoporteForm
 import re, os
 from openpyxl import Workbook
-from django.contrib import messages
+from openpyxl.styles import Alignment
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 
 # Create your views here.
 def index(request):
@@ -110,6 +114,8 @@ def createAnalisis(request):
                 patron12 = r"What are the results of the study\?.*?PDF:\s*(.+?)\s*?(?:Me:|$)"
 
                 patron13 = r"What is the conclusion of the study\?.*?PDF:\s*(.+?)\s*?(?:Me:|$)"
+
+                patron14 = r"What is the APA reference of the article\?.*?PDF:\s*(.+?)\s*?(?:Me:|$)"
             else:
                 patron1 = r"Genera una cita para este articulo\s*?\n\s*?PDF:\s*?(.+?)\s*?(?:Me:|$)"
 
@@ -117,7 +123,7 @@ def createAnalisis(request):
 
                 patron3 = r"¿Cual es la ubicacion geografica \(pais\) del articulo\?.*?PDF:\s*(.+?)\s*?(?:Me:|$)"
 
-                patron4 = r"Dame el resumen textual o abstract del articulo\s*?\n\s*?PDF:\s*?(.+?)\s*?(?:Me:|$)"
+                patron4 = r"Dame el resumen textual o abstracto del articulo\s*?\n\s*?PDF:\s*?(.+?)\s*?(?:Me:|$)"
 
                 patron5 = r"¿Cual es el tema del articulo\?.*?PDF:\s*(.+?)\s*?(?:Me:|$)"
 
@@ -137,6 +143,8 @@ def createAnalisis(request):
 
                 patron13 = r"¿Cual es la conclusion del estudio\?.*?PDF:\s*(.+?)\s*?(?:Me:|$)"
 
+                patron14 = r"¿Cual es la referencia APA del articulo\?.*?PDF:\s*(.+?)\s*?(?:Me:|$)"
+
             citacion = obtenerRespuesta(patron1, contenido)
             titulo = obtenerRespuesta(patron2, contenido)
             ubicacion = obtenerRespuesta(patron3, contenido)
@@ -150,6 +158,7 @@ def createAnalisis(request):
             metodologia = obtenerRespuesta(patron11, contenido)
             resultados = obtenerRespuesta(patron12, contenido)
             conclusiones =  obtenerRespuesta(patron13, contenido)
+            ref_apa = obtenerRespuesta(patron14, contenido)
 
             i = CargaAnalisis(
                 citacion = citacion,
@@ -168,7 +177,8 @@ def createAnalisis(request):
                 resultados = resultados,
                 conclusiones = conclusiones,
                 lenguaje_texto = request.POST['lenguaje_texto'],
-                id_usuario = User.objects.get(id=usuario)
+                id_usuario = User.objects.get(id=usuario),
+                ref_apa = ref_apa
                 )
             try:
                 i.save()
@@ -190,7 +200,7 @@ def obtenerRespuesta(patron, contenido):
         respuesta = match.group(1).strip()
         return respuesta
     else:
-        return False
+        return "No se encontró"
     
 def deleteAnalisis(request, id):
     analisis = get_object_or_404(CargaAnalisis, id=id)
@@ -215,8 +225,24 @@ def export_to_excel(request):
             idioma = 'Inglés',
         else:
             idioma = 'Español'
-        ws1.append([index, "", obj.ubicacion, idioma, "", "", obj.titulo_articulo, "", "", "", obj.resumen, obj.problema, obj.objetivos,
-                    obj.referentes_teoricos, obj.tipo_metodologia, obj.diseno_metodologia, obj.metodologia, obj.resultados, obj.conclusiones])
+        
+        ws1.append([index, "", obj.ubicacion, idioma, obj.ref_apa, "", obj.titulo_articulo, "", "", "", obj.resumen, obj.problema, obj.objetivos,
+                    str(obj.referentes_teoricos), obj.tipo_metodologia, obj.diseno_metodologia, obj.metodologia, obj.resultados, obj.conclusiones])
+        
+    for columna in ws1.columns:
+        column = columna[0].column_letter
+        for celda in columna:
+            if celda.row == 1:
+                adjusted_width = (len(str(celda.value)) + 2) * 1.2
+                ws1.column_dimensions[column].width = adjusted_width
+                break    
+        
+    for columna in ws1.iter_cols():
+    # Recorremos todas las filas excepto la primera
+        for fila, celdas in enumerate(columna, start=1):
+        # Aplicar alineación a la izquierda y permitir salto de línea
+            if fila != 1:
+                celdas.alignment = Alignment(horizontal='left', vertical='top', wrap_text=True)    
 
     # Crear otro libro para otro conjunto de datos
     ws2 = wb.create_sheet(title="Actividad introduccion")
@@ -229,7 +255,7 @@ def export_to_excel(request):
         ws2.append([obj.citacion, obj.titulo_articulo, obj.tema, obj.problema, obj.objetivos])
 
     # Guardar el libro de trabajo en un archivo
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename=Analisis_bibliografico.xlsx'
     wb.save(response)
 
@@ -264,6 +290,50 @@ def soporte(request):
         soportes = MensajesSoporte.objects.filter(id_usuario=request.user.id)
 
     return render(request, 'soporte.html', {'form': form, 'mensaje': '', 'soportes':soportes})
+
+def recuperar_clave(request):
+    if request.method == "POST":
+        email = request.POST['email']
+        user = User.objects.filter(email=email).first()
+        user_exists = User.objects.filter(email=email).exists()
+        if user_exists:
+            uid = urlsafe_base64_encode(str(user.id).encode('utf-8'))
+            token = default_token_generator.make_token(user)
+            reset_link = f"https://gestor-bibliografico.onrender.com/restablecer_clave/{uid}/{token}/"
+            # Envía el correo electrónico con el enlace de restablecimiento
+            subject = 'Solicitud de restablecimiento de contraseña'
+            html_content = render_to_string('layouts/restablecer_clave.html', {'reset_link': reset_link})
+            text_content = 'Hola,\nAquí está tu enlace de restablecimiento de contraseña: {}'.format(reset_link)
+            msg = EmailMultiAlternatives(subject, text_content, None, [email])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            #messages.success(request, 'Se ha enviado un correo electrónico con instrucciones para restablecer tu contraseña.')
+            return redirect('signin')
+        else:
+            #messages.error(request, 'No hay ninguna cuenta asociada a este correo electrónico.')
+            return redirect('recuperar_clave')
+    return render(request, 'recuperar_clave.html')
+
+def restablecer_clave(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        # Token válido, permite al usuario restablecer la contraseña
+        if request.method == 'POST':
+            password = request.POST['password']
+            user.set_password(password)
+            user.save()
+            #messages.success(request, 'Tu contraseña ha sido restablecida con éxito.')
+            #return redirect('signin')
+            return render(request, 'password_reset_confirm.html')
+    else:
+        # Token no válido o usuario no encontrado
+        #messages.error(request, 'El enlace de restablecimiento de contraseña es inválido o ha caducado.')
+        return redirect('signin')
 
 #Ejemplos
 def ejemploconcatena(request, nombre):

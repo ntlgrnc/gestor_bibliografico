@@ -13,7 +13,7 @@
             <div class="card border-light mt-3 shadow">
                 <div class="card-body">
                     <form action="{% url 'createAnalisis' %}" method="post" enctype="multipart/form-data">
-                    <div class="row">
+                        <div class="row">
                             <div class="col-10">
                                 {% csrf_token %}
                                 <input type="hidden" name="id_usuario" value="{{ user.id }}">
@@ -48,7 +48,8 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <p class="fw-bold">Archivos guardados <a href="{% url 'exportarAnalisis' %}" class="btn btn-success btn-sm" style="margin-left: 1em;"><i class="fa-regular fa-file-excel"></i> Exportar archivo</a></p>
+            <p class="fw-bold">Archivos guardados <a href="{% url 'exportarAnalisis' %}" class="btn btn-success btn-sm"
+                    style="margin-left: 1em;"><i class="fa-regular fa-file-excel"></i> Exportar archivo</a></p>
             <div class="accordion" id="accordionExample">
                 {% for data in analisis %}
                 <div class="accordion-item">
@@ -75,7 +76,9 @@
                             <b>Metodología:</b> {{ data.metodologia }} <br>
                             <b>Resultados de estudio:</b> {{ data.resultados }} <br>
                             <b>Conclusión:</b> {{ data.conclusiones }} <br><br>
-                            <a href="{% url 'deleteAnalisis' id=data.id %}" class="btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i> Borrar</a>
+                            <b>Referencia APA:</b> {{ data.ref_apa }} <br><br>
+                            <a href="{% url 'deleteAnalisis' id=data.id %}" class="btn btn-danger btn-sm"><i
+                                    class="fa-regular fa-trash-can"></i> Borrar</a>
                         </div>
                     </div>
                 </div>
@@ -120,6 +123,8 @@
                                     class="fa-regular fa-copy"></i></a></li>
                         <li>What is the conclusion of the study? <a href="#" onclick="copiarPortapapeles(13,'en')"><i
                                     class="fa-regular fa-copy"></i></a></li>
+                                    <li>What is the APA reference of the article? <a href="#" onclick="copiarPortapapeles(14,'en')"><i
+                                        class="fa-regular fa-copy"></i></a></li>            
                     </ol>
                     <ol id="lista-espanol">
                         <li>Genera una cita para este articulo <a href="#" onclick="copiarPortapapeles(1,'es')"><i
@@ -148,6 +153,8 @@
                         <li>¿Cuales son los resultados del estudio? <a href="#" onclick="copiarPortapapeles(12,'es')"><i
                                     class="fa-regular fa-copy"></i></a></li>
                         <li>¿Cual es la conclusion del estudio? <a href="#" onclick="copiarPortapapeles(13,'es')"><i
+                                    class="fa-regular fa-copy"></i></a></li>
+                        <li>¿Cual es la referencia APA del articulo? <a href="#" onclick="copiarPortapapeles(14,'es')"><i
                                     class="fa-regular fa-copy"></i></a></li>
                     </ol>
                     </p>
@@ -186,6 +193,7 @@
             11: 'What is the study methodology and its research paradigm?',
             12: 'What are the results of the study?',
             13: 'What is the conclusion of the study?',
+            14: 'What is the APA reference of the article?'
         };
 
         // Objeto con los textos en español
@@ -202,7 +210,8 @@
             10: 'Teniendo en cuenta el tipo de metodologia, ¿es documental cualitativa, experimental cuantitativa o correlacional cuantitativa?',
             11: '¿Cual es la metodologia del estudio y su paradigma de investigacion?',
             12: '¿Cuales son los resultados del estudio?',
-            13: '¿Cual es la conclusion del estudio?'
+            13: '¿Cual es la conclusion del estudio?',
+            14: '¿Cual es la referencia APA del articulo?'
         };
 
         // Determinar el objeto de textos según el idioma

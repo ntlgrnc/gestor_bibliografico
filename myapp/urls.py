@@ -13,6 +13,8 @@ urlpatterns = [
     path('signout/', views.signout, name='signout'),
     path('user/', views.viewUser, name='verPerfil'),
     path('soporte/', views.soporte, name='soporte'),
+    path('recuperar_clave/', views.recuperar_clave, name='recuperar_clave'),
+    path('restablecer_clave/', views.restablecer_clave, name='restablecer_clave'),
     
     path('getUser/<int:id>', views.getUser),
     # se puede usar int o str como tipo de dato
